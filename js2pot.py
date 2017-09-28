@@ -4,19 +4,19 @@ import re
 def searchFolder(path):
 	files = []
 	for file in os.listdir(path):
-		if file.endswith(".js"):
+		if file.endswith(".po*"):
 			files.append(file)
 	return files
 
 def getIdentifiers(file):
     identifiers = []
-    if(os.path.exists(file)):
+    if os.path.exists(file):
         for i, line in enumerate(open(file)):
             tempLine = parseLine(line)
             if tempLine not in identifiers:
                 identifiers.append(tempLine)
             else:
-                print "already in db " + str(tempLine)
+                print 'already in db' + str(tempLine)
     return identifiers
 
 def parseLine(line):
@@ -37,10 +37,10 @@ def writeFile(identifiers, path):
     file.close()
 
 def main():
-	importPath = "/Users/daryl/Documents/react-intl-po-example/locales/en.js"
+    importPath = "/Users/daryl/Documents/react-intl-po-example/locales/en.js"
     exportPath = "/Users/daryl/Documents/react-intl-po-example/locales/isaax-web-app-user.pot"
 
-    enIdentifiers = getIdentifiers(identifiersPath)
+    enIdentifiers = getIdentifiers(importPath)
     writeFile(enIdentifiers, exportPath)
 
 main()
